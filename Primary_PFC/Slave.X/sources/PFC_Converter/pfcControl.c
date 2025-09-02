@@ -154,21 +154,10 @@ void inline __attribute__((optimize(1))) Voltage_Compensator(void)
         dutyOut = 0;
     }
 	
-    #if (FEATURE_SINGLE_PHASE_PWM1 == ENABLED)
-        PG1TRIGA = dutyOut >> 1;
         PG1DC = dutyOut;
-    #else
-        PG1TRIGA = 0;
-        PG1DC = 0;
-    #endif
-
-    #if (FEATURE_SINGLE_PHASE_PWM2 == ENABLED)
-        PG2TRIGA = dutyOut >> 1;
-        PG2DC = dutyOut;
-    #else
-        PG2TRIGA = 0;
-        PG2DC = 0;
-    #endif
+        PG1TRIGA = dutyOut >> 1;
+        PG2DC = PG1DC;
+        PG2TRIGA = PG1TRIGA;
 #endif
     
 }
@@ -344,19 +333,19 @@ void inline __attribute__((optimize(1))) SRControl(void)
         if(pfcStateFlags.IsLine == true && pfcStateFlags.IsNeutral == false)
         {
             // Line State
-            PG1IOCONLbits.SWAP = 1;
-            PG1IOCONLbits.OVRENL = 0;
+            PG1IOCONLbits.OVRENH = 0;
+            PG2IOCONLbits.OVRENH = 1;
         }
         else if(pfcStateFlags.IsLine == false && pfcStateFlags.IsNeutral == true)
         {
             // Neutral Sate
-            PG1IOCONLbits.SWAP = 0;
-            PG1IOCONLbits.OVRENH = 0;		
+            PG1IOCONLbits.OVRENH = 1;
+            PG2IOCONLbits.OVRENH = 0;		
         }
         else
         {
-            PG1IOCONLbits.OVRENL = 1;
             PG1IOCONLbits.OVRENH = 1;
+            PG2IOCONLbits.OVRENH = 1;	
         }
     }
 }

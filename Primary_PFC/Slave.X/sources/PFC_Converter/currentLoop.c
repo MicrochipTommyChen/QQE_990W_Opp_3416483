@@ -5,17 +5,17 @@ void inline __attribute__((optimize(1))) Current_Compensator(void)
 {
     volatile uint16_t dutyOut1 = 0;  // Initialize duty cycle output variable
     
-    // Check if High Line is active
-    if(pfcStateFlags.HighLineActive == ENABLED)
-    {
-        // Scale the PFC current using DCM correction factor
-        pfcCurrentScaled = __builtin_mulss(pfcCurrent, dcmCorrFactor) >> 15;
-    }
-    else
-    {
-        // Use unscaled PFC current
-        pfcCurrentScaled = pfcCurrent;
-    }
+//    // Check if High Line is active
+//    if(pfcStateFlags.HighLineActive == ENABLED)
+//    {
+//        // Scale the PFC current using DCM correction factor
+//        pfcCurrentScaled = __builtin_mulss(pfcCurrent, dcmCorrFactor) >> 15;
+//    }
+//    else
+//    {
+//        // Use unscaled PFC current
+//        pfcCurrentScaled = pfcCurrent;
+//    }
     
     /* PID compensator */
     CloopPID.controlReference = pfcCurrentRef;    // Set the reference input for the controller
@@ -56,15 +56,11 @@ void inline __attribute__((optimize(1))) Current_Compensator(void)
     #endif
 
     #if (VOLTAGE_LOOP_ONLY != ENABLED)
-        #if (FEATURE_SINGLE_PHASE_PWM1 == ENABLED)
-            // Set PWM trigger and duty cycle for PWM1 phase operation
-            PG1TRIGA = dutyOut1 >> 1;
-            PG1DC = dutyOut1;
-        #else
-            // Disable PWM outputs
-            PG1TRIGA = 0;
-            PG1DC = 0;      
-        #endif
+        // Set PWM trigger and duty cycle for PWM1 phase operation           
+        PG1DC = dutyOut1;
+        PG1TRIGA = dutyOut1 >> 1;
+        PG2DC = PG1DC;
+        PG2TRIGA = PG1TRIGA;      
     #endif
 }
 

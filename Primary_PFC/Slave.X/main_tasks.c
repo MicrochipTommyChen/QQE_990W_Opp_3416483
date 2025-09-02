@@ -134,6 +134,7 @@ void Tasks_100ms(void)
 void Tasks_1s(void)
 {
     // put your application specific code here that needs to be called every second
+    LED1_Toggle();
 }
 
 //=======================================================================================================

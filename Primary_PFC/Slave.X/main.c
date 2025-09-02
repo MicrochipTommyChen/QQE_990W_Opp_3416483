@@ -46,14 +46,24 @@
   Section: Included Files
 */
 #include "mcc_generated_files/system.h"
+#include "os/os.h"
+#include "sources/PFC_Converter/defines.h"
 
 /*
                          Main application
  */
 int main(void)
 {
+    Nop();
+    Nop();
+    Nop();
+    
     // initialize the device
     SYSTEM_Initialize();
+    OS_Init();
+    
+    OS_Scheduler_RunForever();
+    
     while (1)
     {
         // Add your application code

@@ -67,10 +67,12 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void) {
 #endif        
     } else {
         PG1DC = 0;
+        PG2DC = 0;
         PG1TRIGA = 0;
-        PG1STATbits.UPDREQ = 1;
+        PG2TRIGA = 0;
     }
 
+    SRControl();
     RMSCurrent_Calculation();
 
     // These functions rely on AC filtered data so called after reading system voltages
@@ -159,6 +161,8 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN7Interrupt(void) {
 	vacAvg = vacSum >> 2;
     
     vacFiltered = vacAvg << SHIFT_Q15;
+    
+    VacRectify(vacLine, vacNeutral);
     
     /* Sampling PFC Bulk Voltage */
     pfcBulkVoltage = ADCBUF5;
