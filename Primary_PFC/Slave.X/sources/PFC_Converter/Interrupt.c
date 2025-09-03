@@ -35,6 +35,7 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void) {
     #endif
 
     if (pwr_ctrl_state == PCS_NORMAL || pwr_ctrl_state == PCS_SOFT_START) {
+        LED2_SetHigh();
         /* reset the PWM duty */
         if (pfcBulkVoltageFiltered > PFCVOUTRESETADC) {
             pfcStateFlags.PfcVoutReset = ENABLED;
@@ -66,6 +67,7 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void) {
         }
 #endif        
     } else {
+        LED2_SetLow();
         PG1DC = 0;
         PG2DC = 0;
         PG1TRIGA = 0;

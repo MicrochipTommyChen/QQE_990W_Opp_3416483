@@ -59,7 +59,7 @@ THESE TERMS.
 #define MEASCT2         18      /* CT2 Raw ADC results */
 
 #if (DACOUT == ENABLED)
-#define DACFUNCT    VINSENSEFILT
+#define DACFUNCT    MEASCURR
 #else
 #endif
                                         
@@ -79,12 +79,18 @@ THESE TERMS.
 #define VRMS2VPEAK(Vrms)                (((DWORD)Vrms * SQRT2GAIN) >> 10)
 
 /* Input Voltage/Output Voltage /Current Feedback Gains */
-#define VACFBGAIN                       0.06832     /* (Bulk Voltage Divider network) */
-#define VBULKFBGAIN                     0.06832     /* (Input Voltage Divider network) */
+#define VACFBGAIN                       0.003533569     /* (Bulk Voltage Divider network) */
+#define VBULKFBGAIN                     0.003533569     /* (Input Voltage Divider network) */
+#define IINFBGAIN                       0.165
 
-#define REF_IIN_MAX                     5.5
-#define IIN_REAL2ADC(Iin)               (uint16_t)(((float)Iin * 4096) / REF_IIN_MAX)
-#define CURRENT_REFERENCE_MAX           (uint16_t)IIN_REAL2ADC(5)
+/* IIN Configuration */
+#define INPUTVOLTAGE                    11          /* input Voltage threshold in volts for overcurrent protection */
+#define INPUTVOLTAGEADC                 (int16_t)(INPUTVOLTAGE * VACFBGAIN * ADCRESOLUTION)
+#define REF_IIN_MAX                     17.0
+#define REF_IIN_MAX_ADC                 (int16_t)(REF_IIN_MAX * IINFBGAIN * ADCRESOLUTION)
+#define CURRENT_REFERENCE_MAX           (uint16_t)REF_IIN_MAX_ADC
+#define CBC_SET_POINT                   19
+#define CBC_SET_POINT_ADC               (int16_t)(CBC_SET_POINT * IINFBGAIN * ADCRESOLUTION)
 
 #define SHIFT_Q15                       3         /* left shift value to mak Q1.15 format */
 #define MULSHIFT                        1         /* Shift used in multiplication (mul.ss) */
@@ -97,8 +103,8 @@ THESE TERMS.
 #define PERIOD2DUTY(Period)             (Period * 100UL / PWM_INIT_PTPER)
 
 /* PWM Frequency Configuration */
-#define PWM_FREQ                        100														
-#define PWM_TRIG_TIME                   100UL
+#define PWM_FREQ                        66														
+#define PWM_TRIG_TIME                   66UL
 #define PWM_FREQ_HZ                     (PWM_FREQ * 1000UL)						
 #define PWM_INIT_PTPER                  (uint16_t)(((F_ACLK / PWM_FREQ_HZ)))
 #define PWM_DUTY_MAX                    (uint16_t)(DUTY2PERIOD(PWM_INIT_PTPER, PWM_DUTY_MAX_PERCENT))
@@ -115,16 +121,16 @@ THESE TERMS.
 /* VIN BROWN IN/OUT Configuration */
 #define INPUTVOLTAGE                    11          /* input Voltage threshold in volts for overcurrent protection */
 #define INPUTVOLTAGEADC                 (int16_t)(INPUTVOLTAGE * VACFBGAIN * ADCRESOLUTION)
-#define INPUT_BROWNIN                   8
+#define INPUT_BROWNIN                   87
 #define INPUT_BROWNIN_ADC               (int16_t)(INPUT_BROWNIN * VACFBGAIN * ADCRESOLUTION)
-#define INPUT_BROWNOUT                  6
+#define INPUT_BROWNOUT                  85
 #define INPUT_BROWNOUT_ADC              (int16_t)(INPUT_BROWNOUT * VACFBGAIN * ADCRESOLUTION)
 
-#define INPUTVOLTAGEHIGHLINE            17
+#define INPUTVOLTAGEHIGHLINE            150
 #define INPUTVOLTAGEHIGHLINEADC         (int16_t)(INPUTVOLTAGEHIGHLINE * VACFBGAIN * ADCRESOLUTION)
 #define INPUTVOLTAGEHIGHLINEHYSADC      (int16_t)((INPUTVOLTAGEHIGHLINE + 5) * VACFBGAIN * ADCRESOLUTION)
 
-#define INPUTVOLTAGE_ZERO               15
+#define INPUTVOLTAGE_ZERO               5
 #define INPUTVOLTAGE_ZERO_ADC           (int16_t)(INPUTVOLTAGE_ZERO * VACFBGAIN * ADCRESOLUTION)
 #define ZERO_CROSS_BLANK_COUNT          2
 
@@ -133,7 +139,7 @@ THESE TERMS.
 
 /* Output Voltage reference settings */
 #define BULKREDUCTIONLIMIT              2           /* Bulk voltage reduction during Variable DC link voltage     */  
-#define PFCVOLTAGEREF                   40          /* PFC output voltage in volts */
+#define PFCVOLTAGEREF                   400          /* PFC output voltage in volts */
 
 #define PFCVOLTAGEREF_LIGHT_LOAD        (PFCVOLTAGEREF - BULKREDUCTIONLIMIT)     /* PFC output voltage in volts (when variable DC_Link is enabled) */
 
@@ -154,10 +160,10 @@ THESE TERMS.
 #define SOFTSTARTSCALER                 (uint16_t) ((32767 / SOFTSTARTCOUNT) << 10)
 
 /*Input Voltage Limits */
-#define INPUTUNDERVOLTAGE               8           /* Under Voltage threshold in volts */
+#define INPUTUNDERVOLTAGE               85           /* Under Voltage threshold in volts */
 #define INPUTUNDERVOLTAGEADC            (uint16_t)(INPUTUNDERVOLTAGE * VACFBGAIN * ADCRESOLUTION)
 
-#define INPUTOVERVOLTAGE                27          /* Over Voltage threshold in volts */
+#define INPUTOVERVOLTAGE                280          /* Over Voltage threshold in volts */
 #define INPUTOVERVOLTAGEADC             (uint16_t)(INPUTOVERVOLTAGE * VACFBGAIN * ADCRESOLUTION)
 
 #define INPUTVOLTAGEHYST                3           /* Hysteresis in volts */
@@ -167,8 +173,8 @@ THESE TERMS.
 #define INPUTVOLTMAXHYST                (INPUTOVERVOLTAGEADC - INPUTVOLTAGEHYSTADC)
 
 /* Output Voltage Limits */
-#define VOUTMAXHYST                     5
-#define VOUTRESETHYST                   3
+#define VOUTMAXHYST                     50
+#define VOUTRESETHYST                   30
 #define VOUTMINHYST                     10
 #define PFCVOUTMAX                      (PFCVOLTAGEREF + VOUTMAXHYST)                                 
 #define PFCVOUTMAXADC                   (uint16_t)(VBULKFBGAIN * ADCRESOLUTION * PFCVOUTMAX)
@@ -177,9 +183,9 @@ THESE TERMS.
 #define PFCVOUTMIN                      (PFCVOLTAGEREF - VOUTMINHYST)                                 
 #define PFCVOUTMINADC                   (uint16_t)(VBULKFBGAIN*ADCRESOLUTION*PFCVOUTMIN)
 
-#define PFC_OK_POINT                    36
+#define PFC_OK_POINT                    365
 #define PFC_OK_POINT_ADC                (uint16_t)(VBULKFBGAIN * ADCRESOLUTION * PFC_OK_POINT)
-#define PFC_NOTOK_POINT                 32
+#define PFC_NOTOK_POINT                 320
 #define PFC_NOTOK_POINT_ADC             (uint16_t)(VBULKFBGAIN * ADCRESOLUTION * PFC_NOTOK_POINT)
 #define PFC_OK_DELAY_CNT                100                     /* 10 ms */
 #define PFC_NOTOK_DELAY_CNT             2                       /* 200 us */
@@ -195,6 +201,6 @@ THESE TERMS.
 #define RELAY_ON_WAIT_CNT               2000                    /* 200ms */
 
 /* PFC performance enhancement */
-#define VOLTAGE_LOOP_ONLY               DISABLED
+#define VOLTAGE_LOOP_ONLY               DISABLED //DISABLED
 #define FEATURE_SINGLE_PHASE_PWM1       ENABLED   
 #define FEATURE_SINGLE_PHASE_PWM2       ENABLED

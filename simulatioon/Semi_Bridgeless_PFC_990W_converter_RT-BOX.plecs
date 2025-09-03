@@ -1,0 +1,1719 @@
+Plecs {
+  Name          "Semi_Bridgeless_PFC_990W_converter_RT-BOX"
+  Version       "4.9"
+  CircuitModel  "DiscStateSpace"
+  StartTime     "0.0"
+  TimeSpan      "1.0"
+  Timeout       ""
+  Solver        "auto"
+  MaxStep       "1e-3"
+  InitStep      "-1"
+  FixedStep     "TsRTBox"
+  Refine        "5"
+  ZCStepSize    "1e-9"
+  RelTol        "1e-3"
+  AbsTol        "-1"
+  TurnOnThreshold "0"
+  NonIdealSwitchResistance "1"
+  SyncFixedStepTasks "2"
+  UseSingleCommonBaseRate "2"
+  LossVariableLimitExceededMsg "3"
+  NegativeSwitchLossMsg "3"
+  DivisionByZeroMsg "2"
+  DatatypeOverflowMsg "2"
+  DatatypeInheritanceConflictMsg "1"
+  ContSampleTimeConflictMsg "1"
+  StiffnessDetectionMsg "2"
+  MaxConsecutiveZCs "1000"
+  AlgebraicLoopWithStateMachineMsg "2"
+  AssertionAction "1"
+  FixedPointDatatypeOverride "1"
+  InitializationCommands "Vin = 115 * 1.414\nVout = 400\nDuty = 1 - (Vin/Vout)"
+"\nLoad = 500\nR_Load = Vout * Vout / Load\nFix_Load = 10\nFix_R = Vout * Vout"
+" / Fix_Load\nCurrent_Gain = 0.165\nVoltage_Gain = 0.003533569\n\n% Defines RT"
+" Box CPU Step Size.  \n% FPGA Step Size Determined automatically.\nTsRTBox = "
+"1.8e-6;"
+  InitialState  "1"
+  SystemState   ""
+  TaskingMode   "1"
+  TaskConfigurations ""
+  CodeGenParameterInlining "2"
+  CodeGenFloatingPointFormat "2"
+  CodeGenAbsTimeUsageMsg "3"
+  CodeGenBaseName ""
+  CodeGenOutputDir ""
+  CodeGenExtraOpts ""
+  CodeGenTarget "PLECS RT Box 3"
+  CodeGenTargetSettings "AAAAfwAAAAAbQ29kZUdlblRhcmdldDo6U2V0dGluZ3NNYXAAAAAAA"
+"QAAABwAUABMAEUAQwBTACAAUgBUACAAQgBvAHgAIAAzAAAAKQAAABoARQBYAFQARQBSAE4AQQBMAF"
+"8ATQBPAEQARQAAAAIAMQAAABoAVABBAFIARwBFAFQAXwBEAEUAVgBJAEMARQAAADAAcgB0AGIAbwB"
+"4AC0AMgAwAGIAMABmADcAMAA1AGMAZAA2AGMALgBsAG8AYwBhAGwAAABKAFUAUwBFAF8ARABBAFQA"
+"QQBfAFQAWQBQAEUAUwBfAEYATwBSAF8AVABVAE4AQQBCAEwARQBfAFAAQQBSAEEATQBFAFQARQBSA"
+"FMAAAACADEAAAA6AFUAUwBFAF8ARQBYAFQARQBSAE4AXwBNAE8ARABFAEwAXwBEAEEAVABBAF8AUw"
+"BUAFIAVQBDAFQAUwAAAAIAMAAAACAAYQBuAGEAbABvAGcASQBuAHAAdQB0AFIAYQBuAGcAZQAAAAI"
+"AMQAAACIAYQBuAGEAbABvAGcATwB1AHQAcAB1AHQAUgBhAG4AZwBlAAAAAgAxAAAAHABhAG4AYQBs"
+"AG8AZwBTAGEAbQBwAGwAaQBuAGcAAAACADEAAAAQAGMAYQBuADEAQgBhAHUAZAAAAAwANQAwADAAM"
+"AAwADAAAAAUAGMAYQBuADEARQBuAGEAYgBsAGUAAAACADAAAAAiAGMAYQBuADEAUgBlAGMAbwB2AG"
+"UAcgB5AEQAZQBsAGEAeQAAAAIAMAAAAB4AYwBhAG4AMQBUAGUAcgBtAGkAbgBhAHQAaQBvAG4AAAA"
+"CADIAAAAQAGMAYQBuADEAVAB4AFIAeAAAAAIAMQAAABAAYwBhAG4AMgBCAGEAdQBkAAAADAA1ADAA"
+"MAAwADAAMAAAABQAYwBhAG4AMgBFAG4AYQBiAGwAZQAAAAIAMAAAACIAYwBhAG4AMgBSAGUAYwBvA"
+"HYAZQByAHkARABlAGwAYQB5AAAAAgAwAAAAHgBjAGEAbgAyAFQAZQByAG0AaQBuAGEAdABpAG8Abg"
+"AAAAIAMgAAABAAYwBhAG4AMgBUAHgAUgB4AAAAAgAxAAAAJABkAGkAZwBpAHQAYQBsAE8AdQB0AHA"
+"AdQB0AEwAZQB2AGUAbAAAAAIAMQAAABIAZQBuAGEAYgBsAGUAWABDAFAAAAACADAAAAAwAGgAYQBz"
+"AEgAYQByAGQAdwBhAHIAZQBQAHIAZQBwAHIAbwBjAGUAcwBzAGkAbgBnAAAAAgAxAAAAKgBoAGEAc"
+"wBIAGEAcgBkAHcAYQByAGUAUwBpAG0AdQBsAGEAdABpAG8AbgAAAAIAMQAAACIAaABhAHMATgBhAG"
+"4AbwBzAHQAZQBwAFMAbwBsAHYAZQByAAAAAgAxAAAAEgBtAGEAcwB0AGUAcgBTAEYAUAAAAAIAMQA"
+"AABgAbQBhAHgAXwBvAHYAZQByAHIAdQBuAHMAAAACADUAAAAgAG4AYQBuAG8AUwB0AGUAcABCAGkA"
+"dABXAGkAZAB0AGgAAAAEADIANgAAABIAbgBhAG4AbwBTAHQAZQBwAFAAAAAEADEAMQAAABgAbgBhA"
+"G4AbwBTAHQAZQBwAFMAaQB6AGUAAAAIADQAZQAtADkAAAAeAG4AYQBuAG8AUwB0AGUAcABWAGUAcg"
+"BzAGkAbwBuAAAABgAxAC4AMAAAABoAcwBhAG0AcABsAGkAbgBnAEQAZQBsAGEAeQAAAAIAMAAAABw"
+"AcwBpAG0AdQBsAGEAdABpAG8AbgBNAG8AZABlAAAAAgAxAAAAGABzAHQAYQByAHQAdQBwAFMARgBQ"
+"AF8AQQAAAAIAMAAAABgAcwB0AGEAcgB0AHUAcABTAEYAUABfAEIAAAACADAAAAAYAHMAdABhAHIAd"
+"AB1AHAAUwBGAFAAXwBDAAAAAgAwAAAAGABzAHQAYQByAHQAdQBwAFMARgBQAF8ARAAAAAIAMAAAAB"
+"gAcwB0AGEAcgB0AHUAcABTAEYAUABfAEUAAAACADAAAAAYAHMAdABhAHIAdAB1AHAAUwBGAFAAXwB"
+"GAAAAAgAwAAAAGABzAHQAYQByAHQAdQBwAFMARgBQAF8ARwAAAAIAMAAAABgAcwB0AGEAcgB0AHUA"
+"cABTAEYAUABfAEgAAAACADAAAAAeAHMAeQBuAGMAaAByAG8AbgBpAHoAZQBUAGkAbQBlAAAAAgAwA"
+"AAAEAB4AGMAcABTAGwAYQB2AGUAAAAAAAAAIAB4AGMAcABTAGwAYQB2AGUASQBkAGUAbgB0AGkAdA"
+"B5AAAAAgAx"
+  ExtendedMatrixPrecision "1"
+  MatrixSignificanceCheck "2"
+  RemoveUnusedStateSpaceOutputs "1"
+  EnableStateSpaceSplitting "2"
+  DisplayStateSpaceSplitting "1"
+  DiscretizationMethod "2"
+  ExternalModeSettings ""
+  AlgebraicLoopMethod "1"
+  AlgebraicLoopTolerance "1e-6"
+  ScriptsDialogGeometry "[720 384 526 253]"
+  ScriptsDialogSplitterPos "94"
+  Terminal {
+    Type          Input
+    Index         "1"
+  }
+  Terminal {
+    Type          Output
+    Index         "1"
+  }
+  Terminal {
+    Type          Output
+    Index         "2"
+  }
+  Terminal {
+    Type          Output
+    Index         "3"
+  }
+  Terminal {
+    Type          Output
+    Index         "4"
+  }
+  Terminal {
+    Type          Input
+    Index         "2"
+  }
+  Terminal {
+    Type          Input
+    Index         "3"
+  }
+  Terminal {
+    Type          Input
+    Index         "4"
+  }
+  Terminal {
+    Type          Input
+    Index         "5"
+  }
+  Schematic {
+    Location      [0, 23; 1680, 959]
+    ZoomFactor    1.2684
+    SliderPosition [0, 0]
+    ShowBrowser   off
+    BrowserWidth  100
+    Component {
+      Type          Resistor
+      Name          "R1"
+      Show          off
+      Position      [970, 265]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+      Parameter {
+        Variable      "R"
+        Value         "R_Load * 1"
+        Show          off
+      }
+    }
+    Component {
+      Type          Ammeter
+      Name          "Am1"
+      Show          off
+      Position      [600, 140]
+      Direction     left
+      Flipped       off
+      LabelPosition south
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm1"
+      Show          off
+      Position      [1120, 245]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+    }
+    Component {
+      Type          Capacitor
+      Name          "C3"
+      Show          off
+      Position      [925, 235]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "C"
+        Value         "680e-6"
+        Show          off
+      }
+      Parameter {
+        Variable      "v_init"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Gain
+      Name          "Gain"
+      Show          on
+      Position      [945, 80]
+      Direction     left
+      Flipped       on
+      LabelPosition north
+      Parameter {
+        Variable      "K"
+        Value         "Current_Gain"
+        Show          on
+      }
+      Parameter {
+        Variable      "Multiplication"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "OutputDataType"
+        Value         "10"
+        Show          off
+      }
+      Parameter {
+        Variable      "DataTypeOverflowMode"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "GainDataType"
+        Value         "11"
+        Show          off
+      }
+    }
+    Component {
+      Type          Diode
+      Name          "D2"
+      Show          off
+      Position      [535, 220]
+      Direction     down
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Vf"
+        Value         "0.7"
+        Show          off
+      }
+      Parameter {
+        Variable      "Ron"
+        Value         "0.5"
+        Show          off
+      }
+      Parameter {
+        Variable      "thermal"
+        Value         ""
+        Show          off
+      }
+      Parameter {
+        Variable      "Rth"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "T_init"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "SwitchModel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "f_grid"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Diode
+      Name          "D3"
+      Show          off
+      Position      [535, 295]
+      Direction     down
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Vf"
+        Value         "0.7"
+        Show          off
+      }
+      Parameter {
+        Variable      "Ron"
+        Value         "0.5"
+        Show          off
+      }
+      Parameter {
+        Variable      "thermal"
+        Value         ""
+        Show          off
+      }
+      Parameter {
+        Variable      "Rth"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "T_init"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "SwitchModel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "f_grid"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Diode
+      Name          "D4"
+      Show          off
+      Position      [580, 220]
+      Direction     down
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Vf"
+        Value         "0.7"
+        Show          off
+      }
+      Parameter {
+        Variable      "Ron"
+        Value         "0.5"
+        Show          off
+      }
+      Parameter {
+        Variable      "thermal"
+        Value         ""
+        Show          off
+      }
+      Parameter {
+        Variable      "Rth"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "T_init"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "SwitchModel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "f_grid"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Diode
+      Name          "D5"
+      Show          off
+      Position      [580, 295]
+      Direction     down
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "Vf"
+        Value         "0.7"
+        Show          off
+      }
+      Parameter {
+        Variable      "Ron"
+        Value         "0.5"
+        Show          off
+      }
+      Parameter {
+        Variable      "thermal"
+        Value         ""
+        Show          off
+      }
+      Parameter {
+        Variable      "Rth"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "T_init"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "SwitchModel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "f_grid"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          ACVoltageSource
+      Name          "V_ac"
+      Show          on
+      Position      [175, 270]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "V"
+        Value         "Vin"
+        Show          off
+      }
+      Parameter {
+        Variable      "w"
+        Value         "2*pi*50"
+        Show          off
+      }
+      Parameter {
+        Variable      "phi"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Voltmeter
+      Name          "Vm2"
+      Show          off
+      Position      [360, 260]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+    }
+    Component {
+      Type          Gain
+      Name          "Gain2"
+      Show          on
+      Position      [420, 605]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+      Parameter {
+        Variable      "K"
+        Value         "Voltage_Gain"
+        Show          on
+      }
+      Parameter {
+        Variable      "Multiplication"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "OutputDataType"
+        Value         "10"
+        Show          off
+      }
+      Parameter {
+        Variable      "DataTypeOverflowMode"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "GainDataType"
+        Value         "11"
+        Show          off
+      }
+    }
+    Component {
+      Type          Capacitor
+      Name          "C8"
+      Show          off
+      Position      [660, 245]
+      Direction     down
+      Flipped       on
+      LabelPosition west
+      Parameter {
+        Variable      "C"
+        Value         "470e-9"
+        Show          on
+      }
+      Parameter {
+        Variable      "v_init"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "Components/Electrical/Nanostep/Boost1"
+      Name          "Boost1"
+      Show          on
+      Position      [800, 225]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Frame         [-40, -50; 40, 50]
+      Parameter {
+        Variable      "Configuration"
+        Value         "3"
+        Show          off
+      }
+      Parameter {
+        Variable      "switchModel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "semiSymbol"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "L"
+        Value         "520e-6"
+        Show          off
+      }
+      Parameter {
+        Variable      "R"
+        Value         "0"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [-20, -55]
+        Direction     up
+      }
+      Terminal {
+        Type          Port
+        Position      [-20, 55]
+        Direction     down
+      }
+      Terminal {
+        Type          Port
+        Position      [45, 0]
+        Direction     right
+      }
+      Terminal {
+        Type          Input
+        Position      [-40, 30]
+        Direction     left
+      }
+    }
+    Component {
+      Type          Switch
+      Name          "S1"
+      Show          on
+      Position      [330, 155]
+      Direction     left
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "s_init"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "SwitchModel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "f_grid"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "R2"
+      Show          off
+      Position      [320, 195]
+      Direction     left
+      Flipped       off
+      LabelPosition north
+      Parameter {
+        Variable      "R"
+        Value         "60"
+        Show          on
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "PLECSRTBoxLib/Digital In1"
+      Name          "Digital In1"
+      Show          on
+      Position      [260, 70]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Frame         [-25, -20; 25, 20]
+      Parameter {
+        Variable      "channel"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "inputType"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "TargetPortIndices"
+        Value         "1"
+        Show          off
+      }
+      Terminal {
+        Type          Output
+        Position      [29, 0]
+        Direction     right
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "PLECSRTBoxLib/Analog Out1"
+      Name          "Vac Line"
+      Show          on
+      Position      [595, 665]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Frame         [-25, -20; 25, 20]
+      Parameter {
+        Variable      "channel"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "scale"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "offset"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "minOutput"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "maxOutput"
+        Value         "3.3"
+        Show          off
+      }
+      Parameter {
+        Variable      "TargetPortIndices"
+        Value         "1"
+        Show          off
+      }
+      Terminal {
+        Type          Input
+        Position      [-25, 0]
+        Direction     left
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "PLECSRTBoxLib/Analog Out1"
+      Name          "Vac Neutral"
+      Show          on
+      Position      [720, 530]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Frame         [-25, -20; 25, 20]
+      Parameter {
+        Variable      "channel"
+        Value         "3"
+        Show          off
+      }
+      Parameter {
+        Variable      "scale"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "offset"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "minOutput"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "maxOutput"
+        Value         "3.3"
+        Show          off
+      }
+      Parameter {
+        Variable      "TargetPortIndices"
+        Value         "2"
+        Show          off
+      }
+      Terminal {
+        Type          Input
+        Position      [-25, 0]
+        Direction     left
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "PLECSRTBoxLib/Analog Out1"
+      Name          "Iin"
+      Show          on
+      Position      [1150, 80]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Frame         [-25, -20; 25, 20]
+      Parameter {
+        Variable      "channel"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "scale"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "offset"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "minOutput"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "maxOutput"
+        Value         "3.3"
+        Show          off
+      }
+      Parameter {
+        Variable      "TargetPortIndices"
+        Value         "3"
+        Show          off
+      }
+      Terminal {
+        Type          Input
+        Position      [-25, 0]
+        Direction     left
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "PLECSRTBoxLib/Analog Out1"
+      Name          "Vout"
+      Show          on
+      Position      [1285, 405]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Frame         [-25, -20; 25, 20]
+      Parameter {
+        Variable      "channel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "scale"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "offset"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "minOutput"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "maxOutput"
+        Value         "3.3"
+        Show          off
+      }
+      Parameter {
+        Variable      "TargetPortIndices"
+        Value         "4"
+        Show          off
+      }
+      Terminal {
+        Type          Input
+        Position      [-25, 0]
+        Direction     left
+      }
+    }
+    Component {
+      Type          ElectricalModelSettings
+      Name          "Electrical\nModel Settings"
+      Show          on
+      Position      [90, 195]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "CodeGenTarget"
+        Value         "2"
+        Show          on
+      }
+      Parameter {
+        Variable      "CodeGenSwitchingAlgorithm"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "CodeGenMatrixCodingStyle"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "CodeGenTopologies"
+        Value         "[]"
+        Show          off
+      }
+      Parameter {
+        Variable      "CodeGenCPUFPGAStepRatio"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Switch
+      Name          "S2"
+      Show          on
+      Position      [225, 195]
+      Direction     left
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "s_init"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "SwitchModel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "f_grid"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "PLECSRTBoxLib/Digital In1"
+      Name          "AC_POWER_SW"
+      Show          on
+      Position      [75, 95]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Frame         [-25, -20; 25, 20]
+      Parameter {
+        Variable      "channel"
+        Value         "31"
+        Show          off
+      }
+      Parameter {
+        Variable      "inputType"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "TargetPortIndices"
+        Value         "2"
+        Show          off
+      }
+      Terminal {
+        Type          Output
+        Position      [29, 0]
+        Direction     right
+      }
+    }
+    Component {
+      Type          Switch
+      Name          "S3"
+      Show          on
+      Position      [270, 235]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Parameter {
+        Variable      "s_init"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "SwitchModel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "f_grid"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "R9"
+      Show          off
+      Position      [270, 285]
+      Direction     up
+      Flipped       off
+      LabelPosition east
+      Parameter {
+        Variable      "R"
+        Value         "10"
+        Show          on
+      }
+    }
+    Component {
+      Type          LogicalOperator
+      Name          "Logical\nOperator"
+      Show          on
+      Position      [160, 135]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Operator"
+        Value         "6"
+        Show          off
+      }
+      Parameter {
+        Variable      "Inputs"
+        Value         "2"
+        Show          off
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "PLECSRTBoxLib/Digital In1"
+      Name          "PWM1H"
+      Show          on
+      Position      [1000, 450]
+      Direction     down
+      Flipped       on
+      LabelPosition south
+      Frame         [-25, -20; 25, 20]
+      Parameter {
+        Variable      "channel"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "inputType"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "TargetPortIndices"
+        Value         "3"
+        Show          off
+      }
+      Terminal {
+        Type          Output
+        Position      [29, 0]
+        Direction     right
+      }
+    }
+    Component {
+      Type          Switch
+      Name          "S4"
+      Show          on
+      Position      [970, 210]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+      Parameter {
+        Variable      "s_init"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "SwitchModel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "f_grid"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "PLECSRTBoxLib/Digital In1"
+      Name          "Digital In3"
+      Show          on
+      Position      [1035, 265]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Frame         [-25, -20; 25, 20]
+      Parameter {
+        Variable      "channel"
+        Value         "30"
+        Show          off
+      }
+      Parameter {
+        Variable      "inputType"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "TargetPortIndices"
+        Value         "4"
+        Show          off
+      }
+      Terminal {
+        Type          Output
+        Position      [29, 0]
+        Direction     right
+      }
+    }
+    Component {
+      Type          Gain
+      Name          "Gain4"
+      Show          on
+      Position      [1170, 245]
+      Direction     left
+      Flipped       on
+      LabelPosition north
+      Parameter {
+        Variable      "K"
+        Value         "Voltage_Gain"
+        Show          on
+      }
+      Parameter {
+        Variable      "Multiplication"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "OutputDataType"
+        Value         "10"
+        Show          off
+      }
+      Parameter {
+        Variable      "DataTypeOverflowMode"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "GainDataType"
+        Value         "11"
+        Show          off
+      }
+    }
+    Component {
+      Type          Resistor
+      Name          "R10"
+      Show          off
+      Position      [945, 265]
+      Direction     down
+      Flipped       off
+      LabelPosition west
+      Parameter {
+        Variable      "R"
+        Value         "Fix_R"
+        Show          off
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "Components/Electrical/Nanostep/Boost1"
+      Name          "Boost2"
+      Show          on
+      Position      [740, 360]
+      Direction     down
+      Flipped       on
+      LabelPosition east
+      Frame         [-40, -50; 40, 50]
+      Parameter {
+        Variable      "Configuration"
+        Value         "3"
+        Show          off
+      }
+      Parameter {
+        Variable      "switchModel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "semiSymbol"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "L"
+        Value         "520e-6"
+        Show          off
+      }
+      Parameter {
+        Variable      "R"
+        Value         "0"
+        Show          off
+      }
+      Terminal {
+        Type          Port
+        Position      [-20, -55]
+        Direction     up
+      }
+      Terminal {
+        Type          Port
+        Position      [-20, 55]
+        Direction     down
+      }
+      Terminal {
+        Type          Port
+        Position      [45, 0]
+        Direction     right
+      }
+      Terminal {
+        Type          Input
+        Position      [-40, 30]
+        Direction     left
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "PLECSRTBoxLib/Digital In1"
+      Name          "PWM2H"
+      Show          on
+      Position      [1000, 530]
+      Direction     down
+      Flipped       on
+      LabelPosition south
+      Frame         [-25, -20; 25, 20]
+      Parameter {
+        Variable      "channel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "inputType"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "TargetPortIndices"
+        Value         "5"
+        Show          off
+      }
+      Terminal {
+        Type          Output
+        Position      [29, 0]
+        Direction     right
+      }
+    }
+    Component {
+      Type          Ammeter
+      Name          "Am2"
+      Show          off
+      Position      [625, 360]
+      Direction     left
+      Flipped       off
+      LabelPosition south
+    }
+    Component {
+      Type          MinMax
+      Name          "Min/Max"
+      Show          on
+      Position      [710, 80]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Operation"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "Inputs"
+        Value         "2"
+        Show          off
+      }
+    }
+    Component {
+      Type          Gain
+      Name          "Gain3"
+      Show          on
+      Position      [565, 530]
+      Direction     left
+      Flipped       on
+      LabelPosition north
+      Parameter {
+        Variable      "K"
+        Value         "-1 * Voltage_Gain"
+        Show          on
+      }
+      Parameter {
+        Variable      "Multiplication"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "OutputDataType"
+        Value         "10"
+        Show          off
+      }
+      Parameter {
+        Variable      "DataTypeOverflowMode"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "GainDataType"
+        Value         "11"
+        Show          off
+      }
+    }
+    Component {
+      Type          MinMax
+      Name          "Min/Max1"
+      Show          on
+      Position      [380, 435]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Operation"
+        Value         "2"
+        Show          off
+      }
+      Parameter {
+        Variable      "Inputs"
+        Value         "2"
+        Show          off
+      }
+    }
+    Component {
+      Type          Constant
+      Name          "Constant"
+      Show          on
+      Position      [325, 455]
+      Direction     right
+      Flipped       off
+      LabelPosition south
+      Frame         [-10, -10; 10, 10]
+      Parameter {
+        Variable      "Value"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "DataType"
+        Value         "10"
+        Show          off
+      }
+    }
+    Component {
+      Type          MinMax
+      Name          "Min/Max2"
+      Show          on
+      Position      [380, 530]
+      Direction     up
+      Flipped       off
+      LabelPosition south
+      Parameter {
+        Variable      "Operation"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "Inputs"
+        Value         "2"
+        Show          off
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "S4"
+      SrcTerminal   1
+      Points        [970, 165]
+      Branch {
+        Points        [925, 165]
+        Branch {
+          DstComponent  "C3"
+          DstTerminal   1
+        }
+        Branch {
+          Points        [820, 165]
+          Branch {
+            DstComponent  "Boost1"
+            DstTerminal   1
+          }
+          Branch {
+            Points        [710, 165]
+            Branch {
+              Points        [710, 270; 760, 270]
+              DstComponent  "Boost2"
+              DstTerminal   1
+            }
+            Branch {
+              Points        [660, 165]
+              Branch {
+                DstComponent  "C8"
+                DstTerminal   1
+              }
+              Branch {
+                Points        [580, 165]
+                Branch {
+                  DstComponent  "D4"
+                  DstTerminal   2
+                }
+                Branch {
+                  Points        [535, 165]
+                  DstComponent  "D2"
+                  DstTerminal   2
+                }
+              }
+            }
+          }
+        }
+      }
+      Branch {
+        Points        [1120, 165]
+        DstComponent  "Vm1"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "S2"
+      SrcTerminal   1
+      Points        [175, 195]
+      Branch {
+        DstComponent  "V_ac"
+        DstTerminal   1
+      }
+      Branch {
+        DstComponent  "Electrical\nModel Settings"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R2"
+      SrcTerminal   1
+      Points        [290, 195]
+      Branch {
+        Points        [270, 195]
+        Branch {
+          DstComponent  "S2"
+          DstTerminal   2
+        }
+        Branch {
+          DstComponent  "S3"
+          DstTerminal   1
+        }
+      }
+      Branch {
+        Points        [290, 155]
+        DstComponent  "S1"
+        DstTerminal   1
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Digital In1"
+      SrcTerminal   1
+      Points        [330, 70]
+      DstComponent  "S1"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Gain"
+      SrcTerminal   2
+      DstComponent  "Iin"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R9"
+      SrcTerminal   1
+      DstComponent  "S3"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "AC_POWER_SW"
+      SrcTerminal   1
+      Points        [130, 95]
+      Branch {
+        Points        [225, 95]
+        DstComponent  "S2"
+        DstTerminal   3
+      }
+      Branch {
+        DstComponent  "Logical\nOperator"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Logical\nOperator"
+      SrcTerminal   1
+      Points        [200, 135; 200, 235]
+      DstComponent  "S3"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "PWM1H"
+      SrcTerminal   1
+      Points        [895, 450; 895, 255]
+      DstComponent  "Boost1"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "S4"
+      SrcTerminal   2
+      DstComponent  "R1"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Digital In3"
+      SrcTerminal   1
+      Points        [1065, 210]
+      DstComponent  "S4"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Boost1"
+      SrcTerminal   3
+      Points        [735, 225; 735, 140]
+      DstComponent  "Am1"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "R1"
+      SrcTerminal   1
+      Points        [970, 320]
+      Branch {
+        Points        [945, 320]
+        Branch {
+          Points        [925, 320]
+          Branch {
+            DstComponent  "C3"
+            DstTerminal   2
+          }
+          Branch {
+            Points        [865, 320]
+            Branch {
+              Points        [820, 320]
+              Branch {
+                DstComponent  "Boost1"
+                DstTerminal   2
+              }
+              Branch {
+                Points        [660, 320]
+                Branch {
+                  DstComponent  "C8"
+                  DstTerminal   2
+                }
+                Branch {
+                  Points        [580, 320]
+                  Branch {
+                    DstComponent  "D5"
+                    DstTerminal   1
+                  }
+                  Branch {
+                    Points        [535, 320]
+                    DstComponent  "D3"
+                    DstTerminal   1
+                  }
+                }
+              }
+            }
+            Branch {
+              Points        [865, 475; 760, 475]
+              DstComponent  "Boost2"
+              DstTerminal   2
+            }
+          }
+        }
+        Branch {
+          DstComponent  "R10"
+          DstTerminal   1
+        }
+      }
+      Branch {
+        Points        [1120, 320]
+        DstComponent  "Vm1"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "D2"
+      SrcTerminal   1
+      Points        [535, 235]
+      Branch {
+        DstComponent  "D3"
+        DstTerminal   2
+      }
+      Branch {
+        Points        [505, 235]
+        Branch {
+          Points        [360, 235]
+          Branch {
+            Points        [360, 195]
+            Branch {
+              DstComponent  "R2"
+              DstTerminal   2
+            }
+            Branch {
+              Points        [360, 155]
+              DstComponent  "S1"
+              DstTerminal   2
+            }
+          }
+          Branch {
+            DstComponent  "Vm2"
+            DstTerminal   1
+          }
+        }
+        Branch {
+          Points        [505, 140]
+          DstComponent  "Am1"
+          DstTerminal   1
+        }
+      }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "D4"
+      SrcTerminal   1
+      Points        [580, 275]
+      Branch {
+        DstComponent  "D5"
+        DstTerminal   2
+      }
+      Branch {
+        Points        [490, 275]
+        Branch {
+          Points        [435, 275; 435, 320; 360, 320]
+          Branch {
+            Points        [270, 320]
+            Branch {
+              DstComponent  "R9"
+              DstTerminal   2
+            }
+            Branch {
+              Points        [175, 320]
+              DstComponent  "V_ac"
+              DstTerminal   2
+            }
+          }
+          Branch {
+            DstComponent  "Vm2"
+            DstTerminal   2
+          }
+        }
+        Branch {
+          Points        [490, 360]
+          DstComponent  "Am2"
+          DstTerminal   1
+        }
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm1"
+      SrcTerminal   3
+      DstComponent  "Gain4"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Gain4"
+      SrcTerminal   2
+      Points        [1200, 245; 1200, 405]
+      DstComponent  "Vout"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Gain2"
+      SrcTerminal   2
+      Points        [420, 665]
+      DstComponent  "Vac Line"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Gain3"
+      SrcTerminal   2
+      DstComponent  "Vac Neutral"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "PWM2H"
+      SrcTerminal   1
+      Points        [885, 530; 885, 390]
+      DstComponent  "Boost2"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "Am2"
+      SrcTerminal   2
+      DstComponent  "Boost2"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Am1"
+      SrcTerminal   3
+      Points        [600, 75]
+      DstComponent  "Min/Max"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Min/Max"
+      SrcTerminal   1
+      DstComponent  "Gain"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Am2"
+      SrcTerminal   3
+      Points        [625, 105; 665, 105; 665, 85]
+      DstComponent  "Min/Max"
+      DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Min/Max1"
+      SrcTerminal   1
+      Points        [420, 435]
+      DstComponent  "Gain2"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Min/Max2"
+      SrcTerminal   1
+      DstComponent  "Gain3"
+      DstTerminal   1
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Constant"
+      SrcTerminal   1
+      Points        [350, 455]
+      Branch {
+        DstComponent  "Min/Max1"
+        DstTerminal   3
+      }
+      Branch {
+        DstComponent  "Min/Max2"
+        DstTerminal   2
+      }
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Vm2"
+      SrcTerminal   3
+      Points        [295, 260; 295, 430]
+      Branch {
+        DstComponent  "Min/Max1"
+        DstTerminal   2
+      }
+      Branch {
+        Points        [295, 535]
+        DstComponent  "Min/Max2"
+        DstTerminal   3
+      }
+    }
+  }
+  Analysis {
+    Type          SteadyStateAnalysis
+    Name          "Steady-State Analysis"
+    OperatingPoint "1"
+    TimeSpan      "-1"
+    StartTime     "0"
+    Tolerance     "1e-4"
+    MaxIter       "20"
+    JacobianPerturbation "1e-4"
+    JacobianCalculation "2"
+    InitCycles    "0"
+    ShowCycles    "5"
+    MaxNumberOfThreads "-1"
+  }
+  Analysis {
+    Type          ACSweep
+    Name          "Vo AC Sweep"
+    ShowLegend    "1"
+    OperatingPoint "1"
+    TimeSpan      "0.1"
+    StartTime     "0"
+    Tolerance     "1e-4"
+    MaxIter       "20"
+    FrequencyRange "[1 100e3]"
+    FrequencyScale "2"
+    AdditionalFreqs "[]"
+    AmplitudeRange "100e-3"
+    NumPoints     "100"
+    Perturbation  "Loop Gain Meter/Perturbation"
+    Response      "Loop Gain Meter/Response"
+    JacobianPerturbation "1e-4"
+    JacobianCalculation "2"
+    InitCycles    "0"
+    MaxNumberOfThreads "-1"
+  }
+}
