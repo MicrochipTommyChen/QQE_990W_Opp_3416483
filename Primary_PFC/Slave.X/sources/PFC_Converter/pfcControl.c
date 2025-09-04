@@ -55,13 +55,16 @@ void inline __attribute__((optimize(1))) Current_Reference_Calculation(void)
         DAC1DATH = pfcVoltCompOutput >> 3;  // Scale down the voltage compensation output by dividing by 8
     #endif
 
-    pfcCurrentRef = __builtin_divud(__builtin_muluu(vacFiltered, pfcVoltCompOutput), denCurrRefCalc_Avg); // Current reference calculation
+    pfcCurrentRef = __builtin_divsd(__builtin_mulus(vacFiltered, pfcVoltCompOutput), denCurrRefCalc_Avg); // Current reference calculation
 
     // Limit the current reference to a maximum allowed value
     if (pfcCurrentRef > (uint16_t)(CURRENT_REFERENCE_MAX << 3))
     {
         pfcCurrentRef = (uint16_t)(CURRENT_REFERENCE_MAX << 3); // Clamp the current reference to max allowed value
     }
+    
+    if(pfcCurrentRef < 0)
+        pfcCurrentRef = 0;
     
     #if ((DACOUT == ENABLED) && (DACFUNCT == REFCURR))
         DAC1DATH = pfcCurrentRef >> 3;
@@ -117,7 +120,8 @@ void inline __attribute__((optimize(1))) VRMS_Calculation(void)
         }
     }
     
-    prevVacFiltered = vacFiltered;                                              /* storing the Vac filtered value */    
+    prevVacFiltered = vacFiltered;                                              /* storing the Vac filtered value */
+    
 }
 /*******************************************************************************
 Function: Voltage_Compensator
@@ -143,7 +147,7 @@ void inline __attribute__((optimize(1))) Voltage_Compensator(void)
 #if (VOLTAGE_LOOP_ONLY == ENABLED)
     
     volatile uint16_t dutyOut = 0;
-    dutyOut = __builtin_muluu(PG1PER, pfcVoltCompOutput) >> 15;
+    dutyOut = __builtin_mulus(PG1PER, pfcVoltCompOutput) >> 15;
     /* Duty output Limit */
     if(dutyOut > PWM_DUTY_MAX)
         dutyOut = PWM_DUTY_MAX;

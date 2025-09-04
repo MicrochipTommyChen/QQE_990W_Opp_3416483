@@ -2,7 +2,7 @@
  * Header file for: Semi_Bridgeless_PFC_990W_converter_RT-BOX
  * Generated with : PLECS 4.9.6
  *                  PLECS RT Box 3 3.1.4
- * Generated on   : 3 Sep 2025 15:23:39
+ * Generated on   : 4 Sep 2025 14:25:21
  */
 #ifndef PLECS_HEADER_Semi_Bridgeless_PFC_990W_converter_RT_BOX_h_
 #define PLECS_HEADER_Semi_Bridgeless_PFC_990W_converter_RT_BOX_h_

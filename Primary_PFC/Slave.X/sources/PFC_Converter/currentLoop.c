@@ -28,19 +28,61 @@ void inline __attribute__((optimize(1))) Current_Compensator(void)
     {
         CloopPID.controlOutput = MAXLIMITQ15;
     }
-
+    
+#if(FEATURE_DUTY_RATIO_FEED_FORWARD == ENABLED)
+    // Limit control output to minimum value
+    if(CloopPID.controlOutput <= -32767)
+    {
+        CloopPID.controlOutput = -32767;
+    }
+#else
     // Limit control output to minimum value
     if(CloopPID.controlOutput <= 0)
     {
         CloopPID.controlOutput = 0;
-    }
+    }    
+#endif
     
     // Update control output variables
     pfcCurrCompOutput = CloopPID.controlOutput;
     currentControlOutput = pfcCurrCompOutput;
+
+#if(FEATURE_DUTY_RATIO_FEED_FORWARD == ENABLED)
     
+    currentControlOutput = __builtin_mulus(PG1PER, currentControlOutput) >> 15;
+    
+	int16_t deltaV = 0; 
+	int32_t temp = 0;
+	int16_t duty_ratio_ff_temp = 0;
+	
+	deltaV = (int16_t)outputBulkVoltage - (int16_t)vacFiltered;
+    
+	if(deltaV > 0)
+	{
+		temp = __builtin_mulsu(deltaV, PG1PER);
+		duty_ratio_ff_temp = __builtin_divsd(temp, outputBulkVoltage);
+	}
+	  
+	currentControlOutput = currentControlOutput + duty_ratio_ff_temp;
+    
+    if(currentControlOutput > (int16_t)PG1PER)
+        currentControlOutput = (int16_t)PG1PER;
+    
+    if(currentControlOutput < 0)
+        currentControlOutput = 0;
+    
+    dutyOut1 = (uint16_t)currentControlOutput;
+    
+    if(dutyOut1 < 0)
+        dutyOut1 = 0;
+    
+#else
     // Calculate duty cycle output
-    dutyOut1 = __builtin_muluu(PG1PER, currentControlOutput) >> 15;
+    dutyOut1 = __builtin_mulus(PG1PER, currentControlOutput) >> 15;
+#endif
+    
+//    // Calculate duty cycle output
+//    dutyOut1 = __builtin_muluu(PG1PER, currentControlOutput) >> 15;
     
     /* Duty output limit */
     if(dutyOut1 >= PWM_DUTY_MAX)
@@ -51,7 +93,7 @@ void inline __attribute__((optimize(1))) Current_Compensator(void)
     if(pfcStateFlags.PfcVoutReset == ENABLED)
     {
         pfcStateFlags.PfcVoutReset = DISABLED;
-//        dutyOut1 = 0;
+        dutyOut1 = 0;
     }
     #endif
 

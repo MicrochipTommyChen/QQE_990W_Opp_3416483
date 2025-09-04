@@ -12,6 +12,7 @@
 #include "pfcSystem.h"
 #include "pin_manager.h"
 #include "currentLoop.h"
+#include <stdbool.h>
 
 /****************************************************************
  *
@@ -39,8 +40,10 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void) {
         /* reset the PWM duty */
         if (pfcBulkVoltageFiltered > PFCVOUTRESETADC) {
             pfcStateFlags.PfcVoutReset = ENABLED;
-            CloopPID.controlOutput = 0;
-            C2loopPID.controlOutput = 0;           
+//            CloopPID.controlOutput = 0;
+            cLoopControlHistory[0] = 0;
+            cLoopControlHistory[1] = 0;
+            cLoopControlHistory[2] = 0;
         }
 
         if(pwr_ctrl_state == PCS_SOFT_START)
@@ -48,24 +51,25 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void) {
             SoftStart();
         }
         
-        Current_Compensator();
-        
 #if 1
-        if (pfcVacState == STATE_VAC_ZERO) {
-            Voltage_Compensator();    
-        }
-#else
-        /* 10KHz */
-        if(v_cnt >= 9)
+        Current_Compensator();
+#else        
+        if(pfcStateFlags.IsLine == true || pfcStateFlags.IsNeutral == true)
         {
-            v_cnt = 0;
-            Voltage_Compensator();    
+            Current_Compensator();
         }
         else
         {
-            v_cnt++;
+            cLoopControlHistory[0] = 0;
+            cLoopControlHistory[1] = 0;
+            cLoopControlHistory[2] = 0;            
         }
-#endif        
+#endif     
+        
+        if (pfcVacState == STATE_VAC_ZERO) {
+            Voltage_Compensator();    
+        }
+       
     } else {
         LED2_SetLow();
         PG1DC = 0;
@@ -104,40 +108,6 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void) {
     //clear the channel_AN0 interrupt flag
     IFS5bits.ADCAN0IF = 0;
 }
-
-///****************************************************************
-// *
-// *	ADC AN1 Interrupt, for AN1
-// *
-// ****************************************************************/
-//void __attribute__((__interrupt__, auto_psv)) _ADCAN1Interrupt(void) {
-//    //LED1_SetHigh();
-//    /* Sampling CT2 Current */
-//    pfcCurrent2 = ADCBUF1 << SHIFT_Q15;
-//
-//    #if((DACOUT == ENABLED) && (DACFUNCT == MEASCT2))
-//        DAC1DATH = ADCBUF1;
-//    #endif
-//
-//    if (pwr_ctrl_state == PCS_NORMAL || pwr_ctrl_state == PCS_SOFT_START) {
-//        /* reset the PWM duty */
-//        if (pfcBulkVoltageFiltered > PFCVOUTRESETADC) {
-//            pfcStateFlags.PfcVoutReset = ENABLED;
-//            C2loopPID.controlOutput = 0;           
-//        }
-//        
-//        Current_Compensator_Two();
-//        
-//    } else {
-//        PG2DC = 0;
-//        PG2TRIGA = 0;
-//        PG2STATbits.UPDREQ = 1;
-//    }
-//    
-//    IFS5bits.ADCAN1IF = 0;
-//    //LED1_SetLow();
-//}
-
 /****************************************************************
  *
  *	ADCAN11 Interrupt, for AN2, AN5, AN6, AN8 and AN11

@@ -40,10 +40,10 @@ Global variables
 
  /* Current Variables */
 
-extern uint16_t    pfcCurrentRef             ;
+extern int16_t     pfcCurrentRef             ;
 extern uint16_t    pfcCurrent                ;
 extern uint16_t    pfcCurrentScaled          ;
-extern uint16_t    currentControlOutput      ;
+extern int16_t     currentControlOutput      ;
 extern uint16_t    pfcCurrent2               ;
 extern uint16_t    pfcCurrent2Scaled         ;
 extern uint16_t    current2ControlOutput     ;
@@ -59,7 +59,7 @@ extern int16_t     pfcVoltageRef             ;
 
 /* Compensator Output Variables*/
 extern int16_t     prevpfcVoltCompOutput     ;
-extern uint16_t    pfcVoltCompOutput         ;
+extern int16_t     pfcVoltCompOutput         ;
 extern uint16_t    pfcPostShift              ;
 extern int16_t     pfcCurrCompOutput         ;
 extern int16_t     pfcCurr2CompOutput        ;

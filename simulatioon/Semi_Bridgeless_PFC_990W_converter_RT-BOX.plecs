@@ -28,7 +28,7 @@ Plecs {
   AlgebraicLoopWithStateMachineMsg "2"
   AssertionAction "1"
   FixedPointDatatypeOverride "1"
-  InitializationCommands "Vin = 115 * 1.414\nVout = 400\nDuty = 1 - (Vin/Vout)"
+  InitializationCommands "Vin = 230 * 1.414\nVout = 400\nDuty = 1 - (Vin/Vout)"
 "\nLoad = 500\nR_Load = Vout * Vout / Load\nFix_Load = 10\nFix_R = Vout * Vout"
 " / Fix_Load\nCurrent_Gain = 0.165\nVoltage_Gain = 0.003533569\n\n% Defines RT"
 " Box CPU Step Size.  \n% FPGA Step Size Determined automatically.\nTsRTBox = "
@@ -122,6 +122,10 @@ Plecs {
     Type          Input
     Index         "5"
   }
+  Terminal {
+    Type          Input
+    Index         "6"
+  }
   Schematic {
     Location      [0, 23; 1680, 959]
     ZoomFactor    1.2684
@@ -132,7 +136,7 @@ Plecs {
       Type          Resistor
       Name          "R1"
       Show          off
-      Position      [970, 265]
+      Position      [1025, 265]
       Direction     down
       Flipped       off
       LabelPosition west
@@ -935,7 +939,7 @@ Plecs {
       SrcComponent  "PLECSRTBoxLib/Digital In1"
       Name          "PWM1H"
       Show          on
-      Position      [1000, 450]
+      Position      [980, 450]
       Direction     down
       Flipped       on
       LabelPosition south
@@ -965,7 +969,7 @@ Plecs {
       Type          Switch
       Name          "S4"
       Show          on
-      Position      [970, 210]
+      Position      [1025, 210]
       Direction     up
       Flipped       off
       LabelPosition west
@@ -990,9 +994,9 @@ Plecs {
       SrcComponent  "PLECSRTBoxLib/Digital In1"
       Name          "Digital In3"
       Show          on
-      Position      [1035, 265]
-      Direction     up
-      Flipped       off
+      Position      [1160, 405]
+      Direction     down
+      Flipped       on
       LabelPosition south
       Frame         [-25, -20; 25, 20]
       Parameter {
@@ -1054,13 +1058,13 @@ Plecs {
       Type          Resistor
       Name          "R10"
       Show          off
-      Position      [945, 265]
+      Position      [980, 265]
       Direction     down
       Flipped       off
       LabelPosition west
       Parameter {
         Variable      "R"
-        Value         "Fix_R"
+        Value         "R_Load * 1"
         Show          off
       }
     }
@@ -1125,7 +1129,7 @@ Plecs {
       SrcComponent  "PLECSRTBoxLib/Digital In1"
       Name          "PWM2H"
       Show          on
-      Position      [1000, 530]
+      Position      [980, 530]
       Direction     down
       Flipped       on
       LabelPosition south
@@ -1271,50 +1275,112 @@ Plecs {
         Show          off
       }
     }
+    Component {
+      Type          Switch
+      Name          "S5"
+      Show          on
+      Position      [980, 210]
+      Direction     up
+      Flipped       off
+      LabelPosition west
+      Parameter {
+        Variable      "s_init"
+        Value         "0"
+        Show          off
+      }
+      Parameter {
+        Variable      "SwitchModel"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "f_grid"
+        Value         "0"
+        Show          off
+      }
+    }
+    Component {
+      Type          Reference
+      SrcComponent  "PLECSRTBoxLib/Digital In1"
+      Name          "Digital In4"
+      Show          on
+      Position      [1160, 485]
+      Direction     down
+      Flipped       on
+      LabelPosition south
+      Frame         [-25, -20; 25, 20]
+      Parameter {
+        Variable      "channel"
+        Value         "29"
+        Show          off
+      }
+      Parameter {
+        Variable      "inputType"
+        Value         "1"
+        Show          off
+      }
+      Parameter {
+        Variable      "TargetPortIndices"
+        Value         "6"
+        Show          off
+      }
+      Terminal {
+        Type          Output
+        Position      [29, 0]
+        Direction     right
+      }
+    }
     Connection {
       Type          Wire
       SrcComponent  "S4"
       SrcTerminal   1
-      Points        [970, 165]
+      Points        [1025, 165]
       Branch {
-        Points        [925, 165]
+        Points        [980, 165]
         Branch {
-          DstComponent  "C3"
-          DstTerminal   1
-        }
-        Branch {
-          Points        [820, 165]
+          Points        [925, 165]
           Branch {
-            DstComponent  "Boost1"
+            DstComponent  "C3"
             DstTerminal   1
           }
           Branch {
-            Points        [710, 165]
+            Points        [820, 165]
             Branch {
-              Points        [710, 270; 760, 270]
-              DstComponent  "Boost2"
+              DstComponent  "Boost1"
               DstTerminal   1
             }
             Branch {
-              Points        [660, 165]
+              Points        [710, 165]
               Branch {
-                DstComponent  "C8"
+                Points        [710, 270; 760, 270]
+                DstComponent  "Boost2"
                 DstTerminal   1
               }
               Branch {
-                Points        [580, 165]
+                Points        [660, 165]
                 Branch {
-                  DstComponent  "D4"
-                  DstTerminal   2
+                  DstComponent  "C8"
+                  DstTerminal   1
                 }
                 Branch {
-                  Points        [535, 165]
-                  DstComponent  "D2"
-                  DstTerminal   2
+                  Points        [580, 165]
+                  Branch {
+                    DstComponent  "D4"
+                    DstTerminal   2
+                  }
+                  Branch {
+                    Points        [535, 165]
+                    DstComponent  "D2"
+                    DstTerminal   2
+                  }
                 }
               }
             }
           }
+        }
+        Branch {
+          DstComponent  "S5"
+          DstTerminal   1
         }
       }
       Branch {
@@ -1423,7 +1489,7 @@ Plecs {
       Type          Signal
       SrcComponent  "Digital In3"
       SrcTerminal   1
-      Points        [1065, 210]
+      Points        [1065, 405; 1065, 210]
       DstComponent  "S4"
       DstTerminal   3
     }
@@ -1439,9 +1505,9 @@ Plecs {
       Type          Wire
       SrcComponent  "R1"
       SrcTerminal   1
-      Points        [970, 320]
+      Points        [1025, 320]
       Branch {
-        Points        [945, 320]
+        Points        [980, 320]
         Branch {
           Points        [925, 320]
           Branch {
@@ -1679,6 +1745,21 @@ Plecs {
         DstComponent  "Min/Max2"
         DstTerminal   3
       }
+    }
+    Connection {
+      Type          Wire
+      SrcComponent  "S5"
+      SrcTerminal   2
+      DstComponent  "R10"
+      DstTerminal   2
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "Digital In4"
+      SrcTerminal   1
+      Points        [1010, 485; 1010, 335; 1000, 335]
+      DstComponent  "S5"
+      DstTerminal   3
     }
   }
   Analysis {

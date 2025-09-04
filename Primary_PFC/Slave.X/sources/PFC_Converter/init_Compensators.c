@@ -62,7 +62,7 @@ void initPFCComp(void)
     VloopPID.controlHistory = &vLoopControlHistory[0];      /*Set up pointer to controller history samples */
     PIDInit(&VloopPID);                                     /*Clear the controller history and the controller output */
     vLoopKcoeffs[0] = Q15(0.1);
-    vLoopKcoeffs[1] = Q15(0.0025);
+    vLoopKcoeffs[1] = Q15(0.01);
     vLoopKcoeffs[2] = Q15(0);
     PIDCoeffCalc(&vLoopKcoeffs[0], &VloopPID);              /*Derive the a,b, & c coefficients from the Kp, Ki & Kd */
     
@@ -70,8 +70,8 @@ void initPFCComp(void)
     CloopPID.abcCoefficients = &cLoopABCCoefficient[0];     /*Set up pointer to derived coefficients */
     CloopPID.controlHistory = &cLoopControlHistory[0];      /*Set up pointer to controller history samples */
     PIDInit(&CloopPID);                                     /*Clear the controller history and the controller output */
-    cLoopKcoeffs[0] = Q15(0.3);
-    cLoopKcoeffs[1] = Q15(0.05);
+    cLoopKcoeffs[0] = Q15(0.6);
+    cLoopKcoeffs[1] = Q15(0.015);
     cLoopKcoeffs[2] = Q15(0);
     PIDCoeffCalc(&cLoopKcoeffs[0], &CloopPID);             /*Derive the a,b, & c coefficients from the Kp, Ki & Kd */
     

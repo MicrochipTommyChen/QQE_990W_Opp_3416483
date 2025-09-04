@@ -97,34 +97,63 @@ bool inline __attribute__((optimize(1))) CheckVacInputOK(void)
     static uint16_t bad_cnt = 0;    // Counter for consecutive bad voltage readings
     static bool bInputOk = false;   // Flag indicating if the input voltage is OK
     
-    if(vacRMS > INPUT_BROWNIN_ADC)
+    /* For AC loss detection */
+    static uint16_t u16AcLossCnt = 0;
+    
+    if(vacFiltered < INPUTVOLTAGE_ZERO_ADC)
     {
-        bad_cnt = 0;                // Reset bad voltage counter since voltage is above brown-in threshold
-        if(good_cnt > BROWNIN_DELAY_CNT)
+        if(u16AcLossCnt > VAC_44HZ_CNT)
         {
-            bInputOk = true;        // Input voltage is considered OK after sufficient good readings
+            pfcStateFlags.IsAcLoss = true;
         }
         else
         {
-            good_cnt++;             // Increment good voltage counter
+            u16AcLossCnt++;
         }
     }
-    else if(vacRMS < INPUT_BROWNOUT_ADC)
+    else
     {
-        good_cnt = 0;               // Reset good voltage counter since voltage is below brown-out threshold
-        if(bad_cnt > BROWNOUT_DELAY_CNT)
+        u16AcLossCnt = 0;
+        pfcStateFlags.IsAcLoss = false;
+    }
+    
+    if(pfcStateFlags.IsAcLoss == false)
+    {
+        if(vacRMS > INPUT_BROWNIN_ADC)
         {
-            bInputOk = false;       // Input voltage is considered not OK after sufficient bad readings
+            bad_cnt = 0;                // Reset bad voltage counter since voltage is above brown-in threshold
+            if(good_cnt > BROWNIN_DELAY_CNT)
+            {
+                bInputOk = true;        // Input voltage is considered OK after sufficient good readings
+            }
+            else
+            {
+                good_cnt++;             // Increment good voltage counter
+            }
+        }
+        else if(vacRMS < INPUT_BROWNOUT_ADC)
+        {
+            good_cnt = 0;               // Reset good voltage counter since voltage is below brown-out threshold
+            if(bad_cnt > BROWNOUT_DELAY_CNT)
+            {
+                bInputOk = false;       // Input voltage is considered not OK after sufficient bad readings
+            }
+            else
+            {
+                bad_cnt++;              // Increment bad voltage counter
+            }
         }
         else
         {
-            bad_cnt++;              // Increment bad voltage counter
+            good_cnt = 0;               // Reset counters if voltage is between thresholds
+            bad_cnt = 0;
         }
     }
     else
     {
         good_cnt = 0;               // Reset counters if voltage is between thresholds
         bad_cnt = 0;
+        bInputOk = false;
     }
     
     return bInputOk;                // Return the status of the input voltage

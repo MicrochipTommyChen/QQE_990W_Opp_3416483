@@ -86,7 +86,8 @@ typedef union {
         
         uint16_t IsLine                 : 1;
         uint16_t IsNeutral              : 1;
-        uint16_t Reserved               : 14;
+        uint16_t IsAcLoss               : 1;
+        uint16_t Reserved               : 13;
     };
     uint32_t SystemState;
     

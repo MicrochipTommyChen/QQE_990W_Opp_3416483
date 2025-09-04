@@ -38,11 +38,11 @@ Global variables
 /* Current Variables */
 uint16_t    pfcCurrent              =   0 ;
 uint16_t    pfcCurrentScaled        =   0 ;
-uint16_t    currentControlOutput    =   0 ;
+int16_t     currentControlOutput    =   0 ;
 uint16_t    pfcCurrent2             =   0 ;
 uint16_t    pfcCurrent2Scaled       =   0 ;
 uint16_t    current2ControlOutput   =   0 ;
-uint16_t     pfcCurrentRef          =   0 ;
+int16_t      pfcCurrentRef          =   0 ;
 uint16_t    denCurrRefCalc          =   0 ;
 uint16_t    pfcShuntCurrent         =   0 ;
 uint32_t    denCurrRefCalc_Sum      =   0 ;
@@ -55,7 +55,7 @@ int16_t     pfcVoltageRef           =   0 ;
 
 /* Compensator Output Variables*/
 int16_t     prevpfcVoltCompOutput   =   0 ;
-uint16_t    pfcVoltCompOutput       =   0 ;
+int16_t     pfcVoltCompOutput       =   0 ;
 uint16_t    pfcPostShift            =   0 ;
 int16_t     pfcCurrCompOutput       =   0 ;
 int16_t     pfcCurr2CompOutput      =   0 ;
