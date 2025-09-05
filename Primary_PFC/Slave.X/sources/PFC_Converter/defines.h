@@ -201,7 +201,7 @@ THESE TERMS.
 #define RELAY_ON_WAIT_CNT               2000                    /* 200ms */
 
 /* PFC performance enhancement */
-#define VOLTAGE_LOOP_ONLY               DISABLED //DISABLED
+#define VOLTAGE_LOOP_ONLY               ENABLED //DISABLED
 #define FEATURE_SINGLE_PHASE_PWM1       ENABLED   
 #define FEATURE_SINGLE_PHASE_PWM2       ENABLED
-#define FEATURE_DUTY_RATIO_FEED_FORWARD ENABLED    //ENABLED
+#define FEATURE_DUTY_RATIO_FEED_FORWARD DISABLED    //ENABLED

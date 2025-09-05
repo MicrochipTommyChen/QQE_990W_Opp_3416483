@@ -1471,14 +1471,6 @@ Plecs {
       DstTerminal   3
     }
     Connection {
-      Type          Signal
-      SrcComponent  "PWM1H"
-      SrcTerminal   1
-      Points        [895, 450; 895, 255]
-      DstComponent  "Boost1"
-      DstTerminal   4
-    }
-    Connection {
       Type          Wire
       SrcComponent  "S4"
       SrcTerminal   2
@@ -1665,14 +1657,6 @@ Plecs {
       DstTerminal   1
     }
     Connection {
-      Type          Signal
-      SrcComponent  "PWM2H"
-      SrcTerminal   1
-      Points        [885, 530; 885, 390]
-      DstComponent  "Boost2"
-      DstTerminal   4
-    }
-    Connection {
       Type          Wire
       SrcComponent  "Am2"
       SrcTerminal   2
@@ -1760,6 +1744,22 @@ Plecs {
       Points        [1010, 485; 1010, 335; 1000, 335]
       DstComponent  "S5"
       DstTerminal   3
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "PWM1H"
+      SrcTerminal   1
+      Points        [875, 450; 875, 390]
+      DstComponent  "Boost2"
+      DstTerminal   4
+    }
+    Connection {
+      Type          Signal
+      SrcComponent  "PWM2H"
+      SrcTerminal   1
+      Points        [905, 530; 905, 255]
+      DstComponent  "Boost1"
+      DstTerminal   4
     }
   }
   Analysis {

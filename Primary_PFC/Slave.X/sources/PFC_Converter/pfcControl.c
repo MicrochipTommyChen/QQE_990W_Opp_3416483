@@ -52,7 +52,7 @@ Description: This function calculates the Current reference based on Voltage com
 void inline __attribute__((optimize(1))) Current_Reference_Calculation(void)
 {
     #if ((DACOUT == ENABLED) && (DACFUNCT == VOLTCOMPOUT))
-        DAC1DATH = pfcVoltCompOutput >> 3;  // Scale down the voltage compensation output by dividing by 8
+        DAC3DATH = pfcVoltCompOutput >> 3;  // Scale down the voltage compensation output by dividing by 8
     #endif
 
     pfcCurrentRef = __builtin_divsd(__builtin_mulus(vacFiltered, pfcVoltCompOutput), denCurrRefCalc_Avg); // Current reference calculation
@@ -67,7 +67,7 @@ void inline __attribute__((optimize(1))) Current_Reference_Calculation(void)
         pfcCurrentRef = 0;
     
     #if ((DACOUT == ENABLED) && (DACFUNCT == REFCURR))
-        DAC1DATH = pfcCurrentRef >> 3;
+        DAC3DATH = pfcCurrentRef >> 3;
     #endif
 }
 /*******************************************************************************
@@ -103,7 +103,7 @@ void inline __attribute__((optimize(1))) VRMS_Calculation(void)
             denCurrRefCalc_Avg = denCurrRefCalc_Sum >> 4;
             
             #if((DACOUT == ENABLED) && (DACFUNCT == VPEAKSQUARE))
-                DAC1DATH = denCurrRefCalc >> 3;
+                DAC3DATH = denCurrRefCalc >> 3;
             #endif            
             
             vacRMS              = (__builtin_mulss(vacPeak,VPK2VRMS) >> 18);  /* VRMS calculation Vpeak(Q1.15) *0.7071 (Q1.15) shifted by 15+3 12-bit*/    
@@ -112,7 +112,7 @@ void inline __attribute__((optimize(1))) VRMS_Calculation(void)
             vacScalerDCM = (vacRMS < INPUTVOLTAGEHIGHLINEADC) ? DISABLED : ENABLED;     /* Set DCM correction scaler based on Vac */
             
             #if ((DACOUT == ENABLED) && (DACFUNCT == VACRMS))    
-                DAC1DATH = vacRMS;
+                DAC3DATH = vacRMS;
             #endif 
             
             pfcStateFlags.PeakDetect = ENABLED;                                  
@@ -146,11 +146,13 @@ void inline __attribute__((optimize(1))) Voltage_Compensator(void)
 
 #if (VOLTAGE_LOOP_ONLY == ENABLED)
     
-    volatile uint16_t dutyOut = 0;
+    volatile int16_t dutyOut = 0;
     dutyOut = __builtin_mulus(PG1PER, pfcVoltCompOutput) >> 15;
     /* Duty output Limit */
     if(dutyOut > PWM_DUTY_MAX)
         dutyOut = PWM_DUTY_MAX;
+    if(dutyOut < 0)
+        dutyOut = 0;
 
     if(pfcStateFlags.PfcVoutReset == ENABLED)
     {
@@ -158,10 +160,10 @@ void inline __attribute__((optimize(1))) Voltage_Compensator(void)
         dutyOut = 0;
     }
 	
-        PG1DC = dutyOut;
-        PG1TRIGA = dutyOut >> 1;
-        PG2DC = PG1DC;
-        PG2TRIGA = PG1TRIGA;
+    PG1DC = dutyOut;
+    PG1TRIGA = dutyOut >> 1;
+    PG2DC = PG1DC;
+    PG2TRIGA = PG1TRIGA;
 #endif
     
 }
@@ -192,11 +194,11 @@ void inline __attribute__((optimize(1))) RMSCurrent_Calculation(void)
         pfcStateFlags.NewRMSPower = ENABLED;
         
         #if ((DACOUT == ENABLED) && (DACFUNCT == RMSCURRENT))     
-        DAC1DATH = rmsPFCCurrent;
+        DAC3DATH = rmsPFCCurrent;
         #endif 
 
         #if ((DACOUT == ENABLED) && (DACFUNCT == CALCRMSPOWER))     
-        DAC1DATH = rmsPower;
+        DAC3DATH = rmsPower;
         #endif 
         
         if(iacArrayIndex > 7) iacArrayIndex = 0;
@@ -337,19 +339,30 @@ void inline __attribute__((optimize(1))) SRControl(void)
         if(pfcStateFlags.IsLine == true && pfcStateFlags.IsNeutral == false)
         {
             // Line State
-            PG1IOCONLbits.OVRENH = 0;
-            PG2IOCONLbits.OVRENH = 1;
+            ENABLE_1_SetLow();
+            ENABLE_2_SetHigh();
+            PG1IOCONLbits.OVRENH = 1;
+            PG2IOCONLbits.OVRENH = 0;
         }
         else if(pfcStateFlags.IsLine == false && pfcStateFlags.IsNeutral == true)
         {
             // Neutral Sate
-            PG1IOCONLbits.OVRENH = 1;
-            PG2IOCONLbits.OVRENH = 0;		
+            ENABLE_1_SetHigh();
+            ENABLE_2_SetLow();
+            PG1IOCONLbits.OVRENH = 0;
+            PG2IOCONLbits.OVRENH = 1;		
         }
         else
         {
+            ENABLE_1_SetLow();
+            ENABLE_2_SetLow();
             PG1IOCONLbits.OVRENH = 1;
             PG2IOCONLbits.OVRENH = 1;	
         }
+    }
+    else
+    {
+        ENABLE_1_SetLow();
+        ENABLE_2_SetLow();  
     }
 }

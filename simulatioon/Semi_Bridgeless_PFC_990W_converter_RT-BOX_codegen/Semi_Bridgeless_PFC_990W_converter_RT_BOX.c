@@ -2,7 +2,7 @@
  * Implementation file for: Semi_Bridgeless_PFC_990W_converter_RT-BOX
  * Generated with         : PLECS 4.9.6
  *                          PLECS RT Box 3 3.1.4
- * Generated on           : 4 Sep 2025 14:25:21
+ * Generated on           : 5 Sep 2025 10:49:26
  */
 #include "Semi_Bridgeless_PFC_990W_converter_RT_BOX.h"
 #ifndef PLECS_HEADER_Semi_Bridgeless_PFC_990W_converter_RT_BOX_h_
@@ -67,10 +67,10 @@ static bool Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_AC_POWER_SW; /* Semi_Bri
 static bool Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_LogicalOperator; /* Semi_Bridgeless_PFC_990W_converter_RT-BOX/Logical Operator */
 static bool Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_DigitalIn3; /* Semi_Bridgeless_PFC_990W_converter_RT-BOX/Digital In3 */
 static bool Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_DigitalIn4; /* Semi_Bridgeless_PFC_990W_converter_RT-BOX/Digital In4 */
-static bool Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_PWM1H; /* Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM1H */
+static bool Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_PWM2H; /* Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM2H */
 static double Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_x1_3NanostepSolver[4
 ];                                                                               /* Semi_Bridgeless_PFC_990W_converter_RT-BOX/Boost1/Configurable Subsystem/Nanostep/1/3 Nanostep Solver */
-static bool Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_PWM2H; /* Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM2H */
+static bool Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_PWM1H; /* Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM1H */
 static double Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_x1_3NanostepSolver_1
 [4];                                                                               /* Semi_Bridgeless_PFC_990W_converter_RT-BOX/Boost2/Configurable Subsystem/Nanostep/1/3 Nanostep Solver */
 
@@ -89,7 +89,7 @@ const char * Semi_Bridgeless_PFC_990W_converter_RT_BOX_errorStatus;
 const double Semi_Bridgeless_PFC_990W_converter_RT_BOX_sampleTime =
    1.79999999999999992e-06;
 const char * const Semi_Bridgeless_PFC_990W_converter_RT_BOX_checksum =
-   "45eb056be86d525507189c3ed5a09165fa8bad84";
+   "e9dc254be7fcc1769a03fe809aea1086fc2fba73";
 /* Target declarations */
 struct PlxDataCaptureRegistry plxDataCaptureRegistry[1];
 const int plxUseEthercat = 0;
@@ -151,8 +151,8 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_initialize(double time)
    /* Initialization for Digital In : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/Digital In4' */
    plxSetupDigitalInput(29, 1);
 
-   /* Initialization for Digital In : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM1H' */
-   plxSetupDigitalInput(0, 1);
+   /* Initialization for Digital In : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM2H' */
+   plxSetupDigitalInput(1, 1);
 
    /* Initialization for 1/3 Nanostep Solver : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/Boost1/Configurable\nSubsystem/Nanostep/1\/3 Nanostep Solver' */
    {
@@ -178,11 +178,11 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_initialize(double time)
       };
       parameters.switch_mask[0] = 1;
       parameters.switch_mask_val[0] = 0;
-      parameters.switch_indices[1] = 0;
+      parameters.switch_indices[1] = 1;
       parameters.switch_mask[1] = 0;
       parameters.switch_mask[6] = 1;
       parameters.switch_mask_val[6] = 0;
-      parameters.switch_indices[7] = 0;
+      parameters.switch_indices[7] = 1;
       parameters.switch_mask[7] = 0;
       parameters.switch_mask[12] = 1;
       parameters.switch_mask_val[12] = 0;
@@ -196,8 +196,8 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_initialize(double time)
    };
    FPGAPhysicalModel_setupOutputToNanostep(0, 12, 13);
 
-   /* Initialization for Digital In : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM2H' */
-   plxSetupDigitalInput(1, 1);
+   /* Initialization for Digital In : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM1H' */
+   plxSetupDigitalInput(0, 1);
 
    /* Initialization for 1/3 Nanostep Solver : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/Boost2/Configurable\nSubsystem/Nanostep/1\/3 Nanostep Solver' */
    {
@@ -223,11 +223,11 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_initialize(double time)
       };
       parameters.switch_mask[2] = 1;
       parameters.switch_mask_val[2] = 0;
-      parameters.switch_indices[3] = 1;
+      parameters.switch_indices[3] = 0;
       parameters.switch_mask[3] = 0;
       parameters.switch_mask[8] = 1;
       parameters.switch_mask_val[8] = 0;
-      parameters.switch_indices[9] = 1;
+      parameters.switch_indices[9] = 0;
       parameters.switch_mask[9] = 0;
       parameters.switch_mask[14] = 1;
       parameters.switch_mask_val[14] = 0;
@@ -505,10 +505,10 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_initialize(double time)
          .sync_steps = 0
       };
 
-      FPGAPhysicalModel_setupInputFromNanostep(1, 1, 4);
-      FPGAPhysicalModel_setupInputFromNanostep(1, 0, 3);
       FPGAPhysicalModel_setupInputFromNanostep(0, 1, 2);
       FPGAPhysicalModel_setupInputFromNanostep(0, 0, 1);
+      FPGAPhysicalModel_setupInputFromNanostep(1, 1, 4);
+      FPGAPhysicalModel_setupInputFromNanostep(1, 0, 3);
       FPGAPhysicalModel_setup(&model);
    }
 }
@@ -544,8 +544,8 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_step(void)
    /* Digital In : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/Digital In4' */
    Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_DigitalIn4 = getDigitalIn(29);
 
-   /* Digital In : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM1H' */
-   Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_PWM1H = getDigitalIn(0);
+   /* Digital In : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM2H' */
+   Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_PWM2H = getDigitalIn(1);
 
    /* 1/3 Nanostep Solver : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/Boost1/Configurable\nSubsystem/Nanostep/1\/3 Nanostep Solver' */
    Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_x1_3NanostepSolver[0] =
@@ -557,8 +557,8 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_step(void)
    Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_x1_3NanostepSolver[3] =
       getNanostepCapacitorVoltage(0,0);
 
-   /* Digital In : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM2H' */
-   Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_PWM2H = getDigitalIn(1);
+   /* Digital In : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/PWM1H' */
+   Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_PWM1H = getDigitalIn(0);
 
    /* 1/3 Nanostep Solver : 'Semi_Bridgeless_PFC_990W_converter_RT-BOX/Boost2/Configurable\nSubsystem/Nanostep/1\/3 Nanostep Solver' */
    Semi_Bridgeless_PFC_990W_converter_RT_BOX_B_x1_3NanostepSolver_1[0] =

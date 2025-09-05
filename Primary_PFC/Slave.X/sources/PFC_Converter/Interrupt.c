@@ -25,14 +25,14 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void) {
     pfcCurrent = ADCBUF0 << SHIFT_Q15;
     
     #if((DACOUT == ENABLED) && (DACFUNCT == MEASCURR))
-        DAC1DATH = ADCBUF0;
+        DAC3DATH = ADCBUF0;
     #endif
     
     vacFiltered = (vacAvg << SHIFT_Q15);
     
     // vacFiltered is set after calling one of the above functions 
     #if ((DACOUT == ENABLED) && (DACFUNCT == VINSENSEFILT))
-        DAC1DATH = vacFiltered >> 3;
+        DAC3DATH = vacFiltered >> 3;
     #endif
 
     if (pwr_ctrl_state == PCS_NORMAL || pwr_ctrl_state == PCS_SOFT_START) {
@@ -76,6 +76,8 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void) {
         PG2DC = 0;
         PG1TRIGA = 0;
         PG2TRIGA = 0;
+        ENABLE_1_SetLow();
+        ENABLE_2_SetLow();        
     }
 
     SRControl();
@@ -140,7 +142,7 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN7Interrupt(void) {
     pfcBulkVoltage = ADCBUF5;
     
     #if ((DACOUT == ENABLED) && (DACFUNCT == BULKVOLTADC))
-        DAC1DATH = pfcBulkVoltage;
+        DAC3DATH = pfcBulkVoltage;
     #endif
 
     pfcBulkVoltageSum = pfcBulkVoltageSum + pfcBulkVoltage - pfcBulkVoltageFiltered;

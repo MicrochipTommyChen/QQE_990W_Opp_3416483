@@ -49,13 +49,14 @@
 #include "system.h"
 #include "system_types.h"
 #include "master.h"
-#include "adc1.h"
-#include "cmp1.h"
 #include "interrupt_manager.h"
 #include "traps.h"
 #include "pwm.h"
 #include "uart1.h"
+#include "cmp1.h"
 #include "tmr1.h"
+#include "cmp3.h"
+#include "adc1.h"
 
 void SYSTEM_Initialize(void)
 {
@@ -65,6 +66,7 @@ void SYSTEM_Initialize(void)
     MASTER_Initialize();
     CMP1_Initialize();
     UART1_Initialize();
+    CMP3_Initialize();
     ADC1_Initialize();
     PWM_Initialize();
     TMR1_Initialize();

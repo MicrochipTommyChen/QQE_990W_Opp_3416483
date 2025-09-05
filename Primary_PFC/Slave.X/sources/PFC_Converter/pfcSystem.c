@@ -59,7 +59,7 @@ void inline __attribute__((optimize(1))) SoftStart(void)
         if(sftStrtVoltageDelta <= 0)
         {
             // Ensure the voltage increment is not negative
-            sftStrtVoltageDelta = 0;
+            sftStrtVoltageDelta = 1;
         }  
     }
     
@@ -79,7 +79,7 @@ void inline __attribute__((optimize(1))) SoftStart(void)
     // If the voltage reference has reached or exceeded the target voltage
     // or if the filtered bulk voltage is greater than or equal to the target voltage
     if((pfcVoltageRef >= PFCVOLTAGEREFADC) || (pfcBulkVoltageFiltered >= PFCVOLTAGEREFADC))
-    //if(pfcVoltageRef >= PFCVOLTAGEREFADC)
+//    if(pfcVoltageRef >= PFCVOLTAGEREFADC)
     {         
         pfcVoltageRef = PFCVOLTAGEREFADC;           // Set the voltage reference to the target voltage
         pfcStateFlags.SoftStartActive = DISABLED;   // Disable the soft start flag                             

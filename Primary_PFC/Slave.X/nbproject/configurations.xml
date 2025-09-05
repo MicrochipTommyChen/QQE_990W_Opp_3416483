@@ -25,6 +25,7 @@
         <itemPath>mcc_generated_files/adc1.h</itemPath>
         <itemPath>mcc_generated_files/uart1.h</itemPath>
         <itemPath>mcc_generated_files/cmp1.h</itemPath>
+        <itemPath>mcc_generated_files/cmp3.h</itemPath>
       </logicalFolder>
       <logicalFolder name="sources" displayName="sources" projectFiles="true">
         <logicalFolder name="misc" displayName="misc" projectFiles="true">
@@ -81,6 +82,7 @@
         <itemPath>mcc_generated_files/adc1.c</itemPath>
         <itemPath>mcc_generated_files/uart1.c</itemPath>
         <itemPath>mcc_generated_files/cmp1.c</itemPath>
+        <itemPath>mcc_generated_files/cmp3.c</itemPath>
       </logicalFolder>
       <logicalFolder name="sources" displayName="sources" projectFiles="true">
         <logicalFolder name="misc" displayName="misc" projectFiles="true">
