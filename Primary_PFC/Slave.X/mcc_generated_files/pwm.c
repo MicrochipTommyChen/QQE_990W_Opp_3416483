@@ -48,6 +48,7 @@
 
 #include "pwm.h"
 #include "clock.h"
+#include "../sources/PFC_Converter/defines.h"
 
 /**
  Section: Driver Interface Function Definitions
@@ -180,9 +181,11 @@ void PWM_Initialize (void)
     // DCA 0; 
     PG2DCA = 0x00;
     // PER 7575; 
-    PG1PER = 0x1D97;
+//    PG1PER = 0x1D97;
+    PG1PER = PWM_INIT_PTPER;
     // PER 7575; 
-    PG2PER = 0x1D97;
+//    PG2PER = 0x1D97;
+    PG2PER = PWM_INIT_PTPER;
     // TRIGA 0; 
     PG1TRIGA = 0x00;
     // TRIGA 0; 

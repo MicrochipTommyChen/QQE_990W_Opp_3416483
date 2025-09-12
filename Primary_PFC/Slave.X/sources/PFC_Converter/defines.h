@@ -30,8 +30,8 @@ THESE TERMS.
 *******************************************************************************/                             
 #include "../project_settings.h"
 
-#define ON   1
-#define OFF  0
+//#define ON   1
+//#define OFF  0
                                
 #define ENABLED    1
 #define DISABLED   0
@@ -201,7 +201,7 @@ THESE TERMS.
 #define RELAY_ON_WAIT_CNT               2000                    /* 200ms */
 
 /* PFC performance enhancement */
-#define VOLTAGE_LOOP_ONLY               ENABLED //DISABLED
+#define VOLTAGE_LOOP_ONLY               DISABLED //DISABLED
 #define FEATURE_SINGLE_PHASE_PWM1       ENABLED   
 #define FEATURE_SINGLE_PHASE_PWM2       ENABLED
-#define FEATURE_DUTY_RATIO_FEED_FORWARD DISABLED    //ENABLED
+#define FEATURE_DUTY_RATIO_FEED_FORWARD ENABLED    //ENABLED

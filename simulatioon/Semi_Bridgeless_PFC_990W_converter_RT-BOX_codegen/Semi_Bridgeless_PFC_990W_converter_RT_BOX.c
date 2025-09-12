@@ -1,8 +1,8 @@
 /*
  * Implementation file for: Semi_Bridgeless_PFC_990W_converter_RT-BOX
  * Generated with         : PLECS 4.9.6
- *                          PLECS RT Box 3 3.1.4
- * Generated on           : 5 Sep 2025 10:49:26
+ *                          PLECS RT Box 3 3.1.7
+ * Generated on           : 12 Sep 2025 10:09:07
  */
 #include "Semi_Bridgeless_PFC_990W_converter_RT_BOX.h"
 #ifndef PLECS_HEADER_Semi_Bridgeless_PFC_990W_converter_RT_BOX_h_
@@ -174,7 +174,7 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_initialize(double time)
          .sw_a_neg_en = {0, 1, 0, 0, 0, 0},
          .sw_b_pos_en = {1, 1, 0, 0, 0, 0},
          .sw_b_neg_en = {1, 1, 0, 0, 0, 0},
-         .enable_capacitors = {0, 0, 0}
+         .enable_computations = 0xffc7
       };
       parameters.switch_mask[0] = 1;
       parameters.switch_mask_val[0] = 0;
@@ -193,6 +193,10 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_initialize(double time)
       parameters.switch_mask[19] = 1;
       parameters.switch_mask_val[19] = 1;
       setupPartialNanostep(0, 0, &parameters);
+      static char* componentPath =
+         "Semi_Bridgeless_PFC_990W_converter_RT-BOX/Boost1";
+      setComponentUsingNanostep(0, 0, componentPath);
+      calculateNanostepAccumulatorAmplitudeLimit(0.000002);
    };
    FPGAPhysicalModel_setupOutputToNanostep(0, 12, 13);
 
@@ -219,7 +223,7 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_initialize(double time)
          .sw_a_neg_en = {0, 1, 0, 0, 0, 0},
          .sw_b_pos_en = {1, 1, 0, 0, 0, 0},
          .sw_b_neg_en = {1, 1, 0, 0, 0, 0},
-         .enable_capacitors = {0, 0, 0}
+         .enable_computations = 0xffc7
       };
       parameters.switch_mask[2] = 1;
       parameters.switch_mask_val[2] = 0;
@@ -238,6 +242,10 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_initialize(double time)
       parameters.switch_mask[21] = 1;
       parameters.switch_mask_val[21] = 1;
       setupPartialNanostep(0, 1, &parameters);
+      static char* componentPath =
+         "Semi_Bridgeless_PFC_990W_converter_RT-BOX/Boost2";
+      setComponentUsingNanostep(0, 1, componentPath);
+      calculateNanostepAccumulatorAmplitudeLimit(0.000002);
    };
    FPGAPhysicalModel_setupOutputToNanostep(1, 12, 14);
 
@@ -505,10 +513,10 @@ void Semi_Bridgeless_PFC_990W_converter_RT_BOX_initialize(double time)
          .sync_steps = 0
       };
 
-      FPGAPhysicalModel_setupInputFromNanostep(0, 1, 2);
-      FPGAPhysicalModel_setupInputFromNanostep(0, 0, 1);
-      FPGAPhysicalModel_setupInputFromNanostep(1, 1, 4);
       FPGAPhysicalModel_setupInputFromNanostep(1, 0, 3);
+      FPGAPhysicalModel_setupInputFromNanostep(0, 1, 2);
+      FPGAPhysicalModel_setupInputFromNanostep(1, 1, 4);
+      FPGAPhysicalModel_setupInputFromNanostep(0, 0, 1);
       FPGAPhysicalModel_setup(&model);
    }
 }

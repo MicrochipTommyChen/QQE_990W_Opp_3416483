@@ -40,7 +40,7 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void) {
         /* reset the PWM duty */
         if (pfcBulkVoltageFiltered > PFCVOUTRESETADC) {
             pfcStateFlags.PfcVoutReset = ENABLED;
-//            CloopPID.controlOutput = 0;
+            CloopPID.controlOutput = 0;
             cLoopControlHistory[0] = 0;
             cLoopControlHistory[1] = 0;
             cLoopControlHistory[2] = 0;
@@ -51,7 +51,7 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void) {
             SoftStart();
         }
         
-#if 1
+#if 0
         Current_Compensator();
 #else        
         if(pfcStateFlags.IsLine == true || pfcStateFlags.IsNeutral == true)
@@ -60,6 +60,7 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN0Interrupt(void) {
         }
         else
         {
+            CloopPID.controlOutput = 0;
             cLoopControlHistory[0] = 0;
             cLoopControlHistory[1] = 0;
             cLoopControlHistory[2] = 0;            

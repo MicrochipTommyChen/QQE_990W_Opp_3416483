@@ -289,5 +289,5 @@ void plxStartup(void)
                            useExternalMode, numExtModeSignals, numTunableParameters,
                            trigger, armResponse, MODEL_CHECKSUM, MODEL_NAME,
                            &modelFunctions, &coreTiming, 0,
-                           1);
+                           1, 1);
 }
